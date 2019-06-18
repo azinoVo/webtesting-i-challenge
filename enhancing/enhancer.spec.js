@@ -19,13 +19,13 @@ describe('enhancer functions', function () {
 
     it ('should enhance the item if succeeded', () => {
 
-        const swordOfMorning = {
-            name: "The Sword of Morning",
+        const swordOfTheMorning = {
+            name: "The Sword of the Morning",
             durability: 100,
             enhancement: 2
         }
 
-        expect(succeed(swordOfMorning).enhancement).toBe(3);
+        expect(succeed(swordOfTheMorning).enhancement).toBe(3);
         expect(succeed({enhancement: 20}).enhancement).toBe(20);
         expect(succeed({enhancement: 21}).enhancement).toBe(0);
         expect(succeed({enhancement: 0}).enhancement).toBe(1);
@@ -35,19 +35,21 @@ describe('enhancer functions', function () {
 
     it ('should decrease durability and/or enhancement when failed depending on current enhancement', () => {
 
-        const chainsOfBabylon = {
-            name: "The Chains of Babylon",
+        const enkidu = {
+            name: "The Chains of Heaven",
             durability: 100,
             enhancement: 2
         }
 
-        expect(fail(chainsOfBabylon).durability).toBe(95);
+        expect(fail(enkidu).durability).toBe(95);
         expect(fail({durability:100, enhancement: 15})).toEqual({durability: 90})
         expect(fail({durability:50, enhancement: 16})).toEqual({durability: 40})
         expect(fail({durability:50, enhancement: 17})).toEqual({durability: 40, enhancement: 16})
         expect(fail({durability:100, enhancement: 20})).toEqual({durability: 100, enhancement: 20})
         expect(fail({durability:100, enhancement: 21})).toEqual({durability: 100, enhancement: 0})
         expect(fail({durability:100, enhancement: -5})).toEqual({durability: 100, enhancement: 0})
+        expect(fail({durability:200, enhancement: -20})).toEqual({durability: 100, enhancement: 0})
+
 
     })
 });
