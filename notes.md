@@ -5,3 +5,5 @@
 
 # Naming conventions
 - name.test.js or name.spec.js for jest to watch the files
+
+- RED, GREEN, REFACTOR, COMMIT - make a commit after passing a test
