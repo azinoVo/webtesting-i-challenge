@@ -77,6 +77,24 @@ function repair(item) {
 }
 
 // Stretch Problem
+// - if the enhancement level is 0, the the name is not modified.
+// - if the enhancement level is greater than 0, change the name to include the enhancement level, preceded by a plus sign ( + ), 
+// between square brackets before the item's name. Example: the name of a "Iron Sword" enhanced to 7 would be "[+7] Iron Sword".
+
 function get(item) {
-  return { ...item };
+  if (item.enhancement > 0 && item.enhancement <= 20) {
+
+    const newItem = {
+        ...item,
+        name: `[+${item.enhancement}] ${item.name}`
+      }
+
+      return {...newItem};
+  } else {
+    if (item.enhancement === 0) {
+      return {...item};
+    } else {
+      return {...item, message: "Where did you get this item?"}
+    }
+  }
 }

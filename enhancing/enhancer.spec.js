@@ -50,7 +50,22 @@ describe('enhancer functions', function () {
         expect(fail({durability:100, enhancement: -5})).toEqual({durability: 100, enhancement: 0})
         expect(fail({durability:200, enhancement: -20})).toEqual({durability: 100, enhancement: 0})
 
+    })
+
+    it ('should change the name of the item depending on enhancement level', () => {
+
+        const enkidu = {
+            name: "The Chains of Heaven",
+            durability: 100,
+            enhancement: 2
+        }
+
+        expect(get(enkidu).name).toBe("[+2] The Chains of Heaven");
+        expect(get({name: "Monkey Staff", enhancement: 15}).name).toEqual("[+15] Monkey Staff");
+        expect(get({name: "Monkey Staff", enhancement: 20}).name).toEqual("[+20] Monkey Staff");
+        expect(get({name: "Monkey Staff", enhancement: 0}).name).toEqual("Monkey Staff");
+        expect(get({name: "Monkey Staff", enhancement: 22}).name).toEqual("Monkey Staff", {message: "Where did you get this item?"});
+        expect(get({name: "Monkey Staff", enhancement: -10}).name).toEqual("Monkey Staff", {message: "Where did you get this item?"});
 
     })
 });
-
